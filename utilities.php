@@ -101,8 +101,7 @@
         mysqli_query($dbconnect, $setRankSQL);
     }
 
-    function getPlayerInfo($uuid, $dbconnect)
-    {
+    function getPlayerInfo($uuid, $dbconnect) {
         $getPlayerInfoSQL = sprintf("SELECT * FROM players WHERE uuid = '%s';",
             mysqli_real_escape_string($dbconnect, $uuid));
         $getPlayerInfoQuery = mysqli_query($dbconnect, $getPlayerInfoSQL);
@@ -141,8 +140,7 @@
     }
 
 
-    function lengthStrToNum($length)
-    {
+    function lengthStrToNum($length) {
         switch ($length) {
             case "5m": //5 minutes
                 return (5 * 60);
