@@ -16,12 +16,14 @@
         header('Location: home.php');
     }
 ?>
-
 <html>
     <head>
         <title>AdminCP :: MCAdministration</title>
         <style>
-            form {
+            a:visited {
+                color: blue;
+            }
+            form, p {
                 margin: 0;
                 padding: 0;
                 border: 0;
@@ -58,11 +60,16 @@
             <input type="text" name="uuid" value="<?php echo (isset($_GET['uuid']) ? $_GET['uuid'] : ""); ?>" />
             <input type="submit" />
         </form>
-    </body>
-</html>
-
 <?php
     if (isset($_GET['uuid'])) {
+        $targetPlayerInfo = getPlayerInfo($_GET['uuid'], $dbconnect);
+        if ($targetPlayerInfo != null) {
+            ?>
+            <p id="name">Name: <?php echo $targetPlayerInfo['last_name']; ?></p>
+            <p id="rank">Rank: <?php echo $targetPlayerInfo['rank']; ?></p>
+            <p id="lastseen">Last Seen: <?php echo date("F j, Y, g:i a", $targetPlayerInfo['lastseen']); ?></p>
+            <?php
+        }
         $action = "";
         if (isset($_GET['action'])) {
             $action = strtolower($_GET['action']);
@@ -164,9 +171,9 @@
 
                         break;
                     case "setrank":
-                        if (playerHasPermission($_SESSION['uuid'], "can_set_rank", $dbconnect)) {
+                        if ($targetPlayerInfo!=null && playerHasPermission($_SESSION['uuid'], "can_set_rank", $dbconnect)) {
                             if (isset($_GET['rank'])) {
-                                $oldRank = getPlayerInfo($_GET['uuid'], $dbconnect)['rank'];
+                                $oldRank = $targetPlayerInfo['rank'];
                                 logAction($_GET['uuid'], "Edit Rank", $_SESSION['uuid'], "Changed rank from " . $oldRank . " to " . $_GET['rank'], 0, time(), $dbconnect);
                                 setRank($_GET['uuid'], $_GET['rank'], $dbconnect);
                                 echo "<p>You have successfully set the rank of " . $_GET['uuid'] . "!</p>";
@@ -213,7 +220,7 @@
             <?php
         }
 
-        if (playerHasPermission($_SESSION['uuid'], "can_set_rank", $dbconnect) && $action!="setrankform") {
+        if ($targetPlayerInfo!=null && playerHasPermission($_SESSION['uuid'], "can_set_rank", $dbconnect) && $action!="setrankform") {
             ?>
             <form name="setrank" action="admincp.php" method="get">
                 <input type="hidden" name="action" value="setrankform" />
@@ -285,3 +292,5 @@
         <?php
     }
 ?>
+    </body>
+</html>

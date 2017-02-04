@@ -101,7 +101,8 @@
         mysqli_query($dbconnect, $setRankSQL);
     }
 
-    function getPlayerInfo($uuid, $dbconnect) {
+    function getPlayerInfo($uuid, $dbconnect)
+    {
         $getPlayerInfoSQL = sprintf("SELECT * FROM players WHERE uuid = '%s';",
             mysqli_real_escape_string($dbconnect, $uuid));
         $getPlayerInfoQuery = mysqli_query($dbconnect, $getPlayerInfoSQL);
@@ -239,4 +240,42 @@
         }
 
         return $color;
+    }
+
+    function formatRank($rank) {
+        $formatting = array();
+        switch($rank) {
+            case "Moderator":
+                $formatting['color'] = "#3C87C7";
+                $formatting['font-weight'] = "bold";
+                $formatting['text-shadow'] = "none";
+
+                break;
+            case "Administrator":
+                $formatting['color'] = "#3C87C7";
+                $formatting['font-weight'] = "bold";
+                $formatting['text-shadow'] = "none";
+
+                break;
+            case "Superadmin":
+                $formatting['color'] = "#CC1417";
+                $formatting['font-weight'] = "bold";
+                $formatting['text-shadow'] = "none";
+
+                break;
+            case "Owner":
+                $formatting['color'] = "#CC1417";
+                $formatting['font-weight'] = "bold";
+                $formatting['text-shadow'] = "0px 0px 1px #FFFD99;";
+
+                break;
+            default:
+                $formatting['color'] = "#000000";
+                $formatting['font-weight'] = "normal";
+                $formatting['text-shadow'] = "none";
+
+                break;
+        }
+
+        return $formatting;
     }
