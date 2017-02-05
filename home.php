@@ -28,6 +28,7 @@
         <h1 id="welcome">Welcome, <?php echo $playerInfo['last_name']; ?>!</h1>
         <h2 id="rank">Rank: <span style="color: <?php echo $formattedRank['color']; ?>; font-weight: <?php echo $formattedRank['font-weight']; ?>; text-shadow: <?php echo $formattedRank['text-shadow']; ?>"><?php echo $playerInfo['rank']; ?></span></h2>
         <h3 id="lastseen">Last Seen: <?php echo date("F j, Y, g:i a", $playerInfo['lastseen']); ?></h3>
+        <h3 id="playtime">Total Playtime: <?php echo round($playerInfo['playtime'] / 3600, 2);  ?> hours</h3>
         <h3 id="kills">Total Kills: <?php echo $playerInfo['kills']; ?></h3>
         <h3 id="deaths">Total Deaths: <?php echo $playerInfo['deaths']; ?></h3>
         <br />

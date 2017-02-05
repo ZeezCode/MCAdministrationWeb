@@ -68,6 +68,7 @@
             <p id="name">Name: <?php echo $targetPlayerInfo['last_name']; ?></p>
             <p id="rank">Rank: <?php echo $targetPlayerInfo['rank']; ?></p>
             <p id="lastseen">Last Seen: <?php echo date("F j, Y, g:i a", $targetPlayerInfo['lastseen']); ?></p>
+            <p id="playtime">Playtime: <?php echo round($targetPlayerInfo['playtime'] / 3600, 2);  ?> hours</p>
             <?php
         }
         $action = "";
