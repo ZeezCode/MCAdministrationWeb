@@ -253,7 +253,7 @@
                             <td><?php echo $punishment['action']; ?></td>
                             <td><?php echo $punishment['staff']; ?></td>
                             <td><?php echo ($punishment['reason'] == null ? "" : $punishment['reason']); ?></td>
-                            <td><?php echo ($punishment['length'] == 0 ? "N/A" : lengthNumToStr($punishment['length'], $punishment['action'])); ?></td>
+                            <td><?php echo lengthNumToStr($punishment['length'], $punishment['action']); ?></td>
                         </tr>
                         <?php
                     }
@@ -283,7 +283,7 @@
                             <td><?php echo $action['action']; ?></td>
                             <td><?php echo ($action['target'] == null ? "N/A" : $action['target']); ?></td>
                             <td><?php echo ($action['reason'] == null ? "" : $action['reason']); ?></td>
-                            <td><?php echo ($action['length'] == 0 ? "N/A" : lengthNumToStr($action['length'], $action['action'])); ?></td>
+                            <td><?php echo lengthNumToStr($action['length'], $action['action']); ?></td>
                         </tr>
                         <?php
                     }

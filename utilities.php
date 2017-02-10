@@ -194,7 +194,7 @@
             case 2678400:
                 return "1 Month";
             case 0:
-                if (strpos(strtolower($action), "ban") !== false) {
+                if ($action == "Ban") {
                     return "Permanent";
                 } else return "N/A";
             default:
